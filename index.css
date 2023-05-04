@@ -66,13 +66,15 @@ body{
     font-weight: 800;
 }
 
-.arrow-box{
+.arrow-wrapper{
     width:30%;
+    height: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 .arrow{
-    padding: 0.3rem; 
+    padding: 0.6rem;
+    text-align: center;
     border-radius: 8px; 
 }
 .arrow:hover{
@@ -89,6 +91,10 @@ body{
     gap: 5px;
     text-align: center;
     padding: 0.5rem 0;
+}
+
+.weekdays:hover{
+    cursor: default;
 }
 
 .days{

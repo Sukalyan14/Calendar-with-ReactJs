@@ -72,9 +72,13 @@ const Calendar = () => {
         <div className="wrapper">
             <div className="month">
                 <h2>{month} , {year}</h2>
-                <div className="arrow-box">
-                    <IoIosArrowUp className="arrow prev"/>
-                    <IoIosArrowDown className="arrow next"/>
+                <div className="arrow-wrapper">
+                    <div className="arrow prev">
+                        <IoIosArrowUp/>
+                    </div>
+                    <div className="arrow next">
+                        <IoIosArrowDown/>
+                    </div>
                 </div>
             </div>
 
