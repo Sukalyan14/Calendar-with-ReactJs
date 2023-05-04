@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Ysabeau:wght@1;100&display=swap');
+:root{
+    --wrapper-bg:rgba(253, 237, 236, 1);
+    --success:#58D68D;
+    --in-progress: #F5B041;
+    --incomplete:#FF4433;
+    --input-field-color: rgba(255, 253, 231, 0.5);
+    --input-field-border:#C0C0C0;
+    --button-color:#2196F3;
+    --text-color:#2C3E50;
+    --green-for-calendar:#a3e4d7;
+    --radio-button-border:#C0C0C0;
+    --radio-button-checked:#29b6f6;
+    --input-placeholder-color:#95a5a6;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Ysabeau', sans-serif; */
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-content: center;
+    background: var(--wrapper-bg);
+}
+
+.text-center{
+    text-align: center;
+}
+
+.wrapper{
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    color: aliceblue;
+    /* From https://css.glass */
+    background: rgba(18, 18, 18, 0.63);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.6px);
+    -webkit-backdrop-filter: blur(1.6px);
+    border: 1px solid rgba(18, 18, 18, 0.26);
+}
+
+.month{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+}
+.month > h2{
+    padding: 0.25rem 0.55rem;
+}
+.month > h2:hover{
+    background: rgba(128, 139, 150, 0.4);
+    color: #F4F6F7;
+    /* border: 1px solid rgba(128, 139, 150, 0.05); */
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.arrow-box{
+    width:30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.arrow{
+    padding: 0.3rem; 
+    border-radius: 8px; 
+}
+.arrow:hover{
+    background: rgba(128, 139, 150, 0.4);
+    color: #F4F6F7;
+    /* border: 1px solid rgba(128, 139, 150, 0.05); */
+    cursor: pointer;
+    
+}
+
+.weekdays{
+    display: grid;
+    grid-template-columns: repeat(7 , 1fr);
+    gap: 5px;
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+.days{
+    padding: 0.4rem 0;
+    display: grid;
+    grid-template-columns: repeat(7 , 1fr);
+    /* height: 100%; */
+    gap: 10px;
+}
+
+.date-button{
+    color: #ECF0F1;
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    border-radius: 10px;
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+}
+.date-button:hover{
+    /* From https://css.glass */
+    background: rgba(128, 139, 150, 0.4);
+    color: #F4F6F7;
+    /* border: 1px solid rgba(128, 139, 150, 0.05); */
+    cursor: pointer;
+    font-weight: 800;
+    transform: scale(1.2);
+}
+
+.today {
+    border-radius: 50%;
+    background-color: var(--success);
+    color: #fff;
+}
+.date-button.today:hover{
+    background-color: var(--success);
+    color: #F4F6F7;
+}
+
+.prev-date,
+.next-date {
+    opacity: 0.5;
+    font-weight: 400;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.date-button.prev-date:hover,
+.date-button.next-date:hover{
+    opacity: 1;
+}
