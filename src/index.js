@@ -74,10 +74,19 @@ const Calendar = () => {
                 <h2>{month} , {year}</h2>
                 <div className="arrow-wrapper">
                     <div className="arrow prev">
-                        <IoIosArrowUp/>
+                        <IoIosArrowUp onClick={()=> {
+                            date.setMonth(date.getMonth() - 1)
+
+                            render_date();
+                            console.log(1)
+                        }}/>
                     </div>
                     <div className="arrow next">
-                        <IoIosArrowDown/>
+                        <IoIosArrowDown onClick={() => {
+                            date.setMonth(date.getMonth() + 1)
+                            console.log(2);
+                            render_date()
+                        }}/>
                     </div>
                 </div>
             </div>
