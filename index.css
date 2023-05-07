@@ -39,6 +39,7 @@ body{
     width: fit-content;
     padding: 0.5rem 1rem;
     color: aliceblue;
+    margin:0.4rem;
     /* From https://css.glass */
     background: rgba(18, 18, 18, 0.63);
     border-radius: 16px;
@@ -52,7 +53,8 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 0.9rem;
+    user-select: none;
 }
 .month > h2{
     padding: 0.25rem 0.55rem;
@@ -91,6 +93,7 @@ body{
     gap: 5px;
     text-align: center;
     padding: 0.5rem 0;
+    user-select: none;
 }
 
 .weekdays:hover{
@@ -98,14 +101,17 @@ body{
 }
 
 .days{
-    padding: 0.4rem 0;
+    padding: 0.4rem;
     display: grid;
+    width: 100%;
+    height: 360px;
     grid-template-columns: repeat(7 , 1fr);
-    /* height: 100%; */
-    gap: 10px;
+    gap: 15px;
 }
 
 .date-button{
+    width:40px;
+    height:40px;
     color: #ECF0F1;
     padding: 0.6rem;
     border-radius: 6px;
@@ -115,6 +121,7 @@ body{
     border-radius: 10px;
     transform: scale(1);
     transition: all 0.5s ease-in-out;
+    user-select: none;
 }
 .date-button:hover{
     /* From https://css.glass */
@@ -146,4 +153,36 @@ body{
 .date-button.prev-date:hover,
 .date-button.next-date:hover{
     opacity: 1;
+}
+
+.year{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0.9rem;
+    user-select: none;
+}
+
+.months{
+    width:380px;
+    /* height:400px; */
+    padding: 0.4rem 0;
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    /* height: 100%; */
+    gap: 15px;
+}
+.month-button{
+    width:60px;
+    height:60px;
+    color: #ECF0F1;
+    padding: 0.6rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    border-radius: 10px;
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+    user-select: none;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 
 //Icon Import
@@ -35,9 +35,9 @@ const render_date = () =>{
 
     const nextDays = 7 - lastDayIndex - 1
 
+    console.log(lastDayIndex , nextDays);
     const current_year = date.getFullYear()
     const current_month = months[date.getMonth()]
-    // console.log(current_month);
 
     let days = []
     
@@ -55,7 +55,7 @@ const render_date = () =>{
 
     for(let x = 1; x <= nextDays; x++){
         days.push(<span className="next-date date-button">{x}</span>)
-    }
+    }//Next month days
 
     return({
         month:current_month,
@@ -64,29 +64,82 @@ const render_date = () =>{
     })
 }
 
+// const render_months = () =>{
+   
+
+//     return({
+//         years:current_year,
+//     })
+// }
+
+const Calendar2 = () => {
+    const current_year = new Date().getFullYear()
+
+    const current_month = new Date(date.getFullYear() , date.getMonth())
+
+    
+    return(
+        <>
+            <div className="wrapper">
+                <div className="year">
+                    <h2>{current_year}</h2>
+                    <div className="arrow-wrapper">
+                        <div className="arrow prev" onClick={()=> {
+                            // date.setMonth(date.getMonth() - 1)
+
+                            // setDate_Date(render_date())
+                        }}>
+                            <IoIosArrowUp />
+                        </div>
+                        <div className="arrow next" onClick={() => {
+                            // date.setMonth(date.getMonth() + 1)
+
+                            // setDate_Date(render_date())
+                        }}>
+                            <IoIosArrowDown />
+                        </div>
+                    </div>
+                </div>
+                <div className="months text-center">{months.map((month) => {
+                    let short_month = month.substring(0,3)
+
+                    return (
+                        <span className="month-button text-center" >{short_month}</span>
+                    )
+                })}</div>
+            </div>
+        </>
+    )
+}
 const Calendar = () => {
-    const { month , year , days} = render_date()    
-    console.log(month , year);
+
+    const [date_data , setDate_Date] = useState(render_date())
+    const { month , year , days} = date_data   
+    
+    // useEffect(() => {
+    //     setDate_Date(render_date())
+    // },[date_data])
+
+    // console.log(month , year , days);
     return(
     <>
         <div className="wrapper">
             <div className="month">
                 <h2>{month} , {year}</h2>
                 <div className="arrow-wrapper">
-                    <div className="arrow prev">
-                        <IoIosArrowUp onClick={()=> {
+                    <div className="arrow prev" onClick={()=> {
                             date.setMonth(date.getMonth() - 1)
 
-                            render_date();
-                            console.log(1)
-                        }}/>
+                            setDate_Date(render_date())
+                        }}>
+                        <IoIosArrowUp />
                     </div>
-                    <div className="arrow next">
-                        <IoIosArrowDown onClick={() => {
+                    <div className="arrow next" onClick={() => {
                             date.setMonth(date.getMonth() + 1)
-                            console.log(2);
-                            render_date()
-                        }}/>
+
+                            setDate_Date(render_date())
+                        }}>
+                        <IoIosArrowDown />
                     </div>
                 </div>
             </div>
@@ -107,6 +160,16 @@ const Calendar = () => {
     )
 }
 
+const Applayout = () => {
+    return(
+        <>
+        <Calendar2/>
+        <Calendar/>
+        {/* <h2>Hello</h2> */}
+        </>
+    )
+    
+}
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
-root.render(<Calendar/>)
+root.render(<Applayout/>)
