@@ -24,7 +24,7 @@ const months = [
 
 const render_date = () =>{
     date.setDate(1)
-
+ 
     const lastDayOfCurrentMonth = new Date( date.getFullYear() , date.getMonth() + 1 , 0).getDate()
     
     const lastDayOfPrevMonth = new Date( date.getFullYear() , date.getMonth() , 0).getDate()
@@ -33,9 +33,6 @@ const render_date = () =>{
 
     const lastDayIndex = new Date( date.getFullYear() , date.getMonth() + 1 , 0).getDay()
 
-    const nextDays = 7 - lastDayIndex - 1
-
-    console.log(lastDayIndex , nextDays);
     const current_year = date.getFullYear()
     const current_month = months[date.getMonth()]
 
@@ -52,11 +49,20 @@ const render_date = () =>{
             days.push(<span className="date-button">{x}</span>)
         }
     } //current month dates
+    
+    // max calendar date spans is 42
+    // const nextDays = 14 - lastDayIndex - 1
+    let nextDays;
+    if(days.length > 35){
+        nextDays = 7 - lastDayIndex - 1;
+    } else {
+        nextDays = 14 - lastDayIndex - 1;
+    }
 
     for(let x = 1; x <= nextDays; x++){
         days.push(<span className="next-date date-button">{x}</span>)
     }//Next month days
-
+    
     return({
         month:current_month,
         year:current_year,
@@ -64,23 +70,12 @@ const render_date = () =>{
     })
 }
 
-// const render_months = () =>{
-   
-
-//     return({
-//         years:current_year,
-//     })
-// }
-
-const Calendar2 = () => {
+const Calendar_month = () => {
     const current_year = new Date().getFullYear()
-
-    const current_month = new Date(date.getFullYear() , date.getMonth())
-
     
     return(
         <>
-            <div className="wrapper">
+            {/* <div className="wrapper">
                 <div className="year">
                     <h2>{current_year}</h2>
                     <div className="arrow-wrapper">
@@ -99,7 +94,8 @@ const Calendar2 = () => {
                             <IoIosArrowDown />
                         </div>
                     </div>
-                </div>
+                </div> */}
+                
                 <div className="months text-center">{months.map((month) => {
                     let short_month = month.substring(0,3)
 
@@ -107,25 +103,43 @@ const Calendar2 = () => {
                         <span className="month-button text-center" >{short_month}</span>
                     )
                 })}</div>
+            {/* </div> */}
+ 
+        </>
+    )
+}
+
+const Calendar_days = ({days}) => {
+    // const { days } = props
+    return (
+        <>
+            <div className="weekdays">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
             </div>
+
+            <div className="days text-center">{days.map(day => {return day})}</div>
         </>
     )
 }
 const Calendar = () => {
 
     const [date_data , setDate_Date] = useState(render_date())
-    const { month , year , days} = date_data   
+    const { month , year } = date_data   
     
-    // useEffect(() => {
-    //     setDate_Date(render_date())
-    // },[date_data])
+    const [calendar_state , setCalendar_state] = useState("days")
 
-    // console.log(month , year , days);
     return(
-    <>
         <div className="wrapper">
-            <div className="month">
-                <h2>{month} , {year}</h2>
+            <div className="month-days-years">
+                <h2 onClick={() => {
+                    setCalendar_state("month")
+                }}>{ calendar_state === "days" ? `${month} , ${year}`  : year}</h2>
                 <div className="arrow-wrapper">
                     <div className="arrow prev" onClick={()=> {
                             date.setMonth(date.getMonth() - 1)
@@ -143,33 +157,16 @@ const Calendar = () => {
                     </div>
                 </div>
             </div>
-
-            <div className="weekdays">
-                <span>Sun</span>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-            </div>
-
-            <div className="days text-center">{days.map(day => {return day})}</div>
+            {/* Main Content */}
+            { calendar_state === 'days' && <Calendar_days {...date_data}/>}
+            { calendar_state === 'month' && <Calendar_month/>}
+            {/* <Calendar_days days = {days}/> */}
+            {/* <Calendar_days {...date_data}/> */}
+           
         </div>
-    </>
     )
 }
 
-const Applayout = () => {
-    return(
-        <>
-        <Calendar2/>
-        <Calendar/>
-        {/* <h2>Hello</h2> */}
-        </>
-    )
-    
-}
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
-root.render(<Applayout/>)
+root.render(<Calendar/>)
