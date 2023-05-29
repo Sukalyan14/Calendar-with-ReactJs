@@ -154,7 +154,7 @@ body{
     opacity: 1;
 }
 
-.year{
+/* .year{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -167,11 +167,10 @@ body{
 .year > h2:hover{
     background: rgba(128, 139, 150, 0.4);
     color: #F4F6F7;
-    /* border: 1px solid rgba(128, 139, 150, 0.05); */
     border-radius: 7px;
     cursor: pointer;
     font-weight: 800;
-}
+} */
 .months{
     width:360px;
     /* height:330px; */

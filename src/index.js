@@ -71,46 +71,46 @@ const render_date = () =>{
 }
 
 const Calendar_month = () => {
-    const current_year = new Date().getFullYear()
+    const [current_year , setCurrentYear] = useState(new Date().getFullYear())
     
     return(
-        <>
-            {/* <div className="wrapper">
-                <div className="year">
-                    <h2>{current_year}</h2>
-                    <div className="arrow-wrapper">
-                        <div className="arrow prev" onClick={()=> {
-                            // date.setMonth(date.getMonth() - 1)
-
-                            // setDate_Date(render_date())
-                        }}>
-                            <IoIosArrowUp />
-                        </div>
-                        <div className="arrow next" onClick={() => {
-                            // date.setMonth(date.getMonth() + 1)
-
-                            // setDate_Date(render_date())
-                        }}>
-                            <IoIosArrowDown />
-                        </div>
+        <>    
+            <div className="month-days-years">
+                <h2>{current_year}</h2>
+                <div className="arrow-wrapper">
+                    <div className="arrow prev" onClick={()=> {
+                        
+                        date.setFullYear(date.getFullYear() - 1)
+                        setCurrentYear(date.getFullYear())
+                    }}>
+                        <IoIosArrowUp />
                     </div>
-                </div> */}
-                
-                <div className="months text-center">{months.map((month) => {
-                    let short_month = month.substring(0,3)
+                    <div className="arrow next" onClick={() => {
+                        
+                        date.setFullYear(date.getFullYear() + 1)
+                        setCurrentYear(date.getFullYear())
+                    }}>
+                        <IoIosArrowDown />
+                    </div>
+                </div>
+            </div>
+            <div className="months text-center">{months.map((month , index) => {
+                let short_month = month.substring(0,3)
 
-                    return (
-                        <span className="month-button text-center" >{short_month}</span>
-                    )
-                })}</div>
-            {/* </div> */}
+                return (
+                    <span className="month-button text-center" onClick={()=> {
+                        
+                        date.setMonth(index)
+                    }}>{short_month}</span>
+                )
+            })}</div>
  
         </>
     )
 }
 
-const Calendar_days = ({days}) => {
-    // const { days } = props
+const Calendar_days = ({days}) => { 
+
     return (
         <>
             <div className="weekdays">
@@ -128,18 +128,16 @@ const Calendar_days = ({days}) => {
     )
 }
 const Calendar = () => {
-
+   
     const [date_data , setDate_Date] = useState(render_date())
-    const { month , year } = date_data   
-    
-    const [calendar_state , setCalendar_state] = useState("days")
+    const { month , year } = date_data
 
     return(
         <div className="wrapper">
             <div className="month-days-years">
                 <h2 onClick={() => {
-                    setCalendar_state("month")
-                }}>{ calendar_state === "days" ? `${month} , ${year}`  : year}</h2>
+
+                }}>{}</h2>
                 <div className="arrow-wrapper">
                     <div className="arrow prev" onClick={()=> {
                             date.setMonth(date.getMonth() - 1)
@@ -158,9 +156,11 @@ const Calendar = () => {
                 </div>
             </div>
             {/* Main Content */}
-            { calendar_state === 'days' && <Calendar_days {...date_data}/>}
-            { calendar_state === 'month' && <Calendar_month/>}
-            {/* <Calendar_days days = {days}/> */}
+            
+            {/* <Calendar_month/> */}
+            {/* { calendar_state === 'days' && <Calendar_days {...date_data}/>} */}
+            {/* { calendar_state === 'month' && <Calendar_month/>} */}
+            <Calendar_days {...date_data} />
             {/* <Calendar_days {...date_data}/> */}
            
         </div>
